@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { RecipesModule } from './recipes/recipes.module';
 import { Recipe } from './recipes/recipe.entity'; // Required to load the entity
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { Recipe } from './recipes/recipe.entity'; // Required to load the entity
       autoLoadEntities: true,
     }),
     RecipesModule,
+    AuthModule,
   ],
 })
 export class AppModule {}
