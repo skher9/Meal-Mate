@@ -18,13 +18,13 @@ export class Recipe {
   description: string;
 
   @Column('text', { array: true })
-  ingredients: string[]; // Array of ingredients
+  ingredients: string[];
 
   @Column('text', { array: true })
-  instructions: string[]; // Array of step-by-step instructions
+  instructions: string[];
 
   @Column()
-  category: string; // e.g., breakfast, lunch, dinner, snack, drink, meal
+  category: string;
 
   @Column({ default: false })
   isVegetarian: boolean;
@@ -36,19 +36,19 @@ export class Recipe {
   containsEgg: boolean;
 
   @Column()
-  region: string; // e.g., Italian, Indian, Mexican
+  region: string;
 
   @Column()
-  prepTime: string; // e.g., "15 min"
+  prepTime: string;
 
   @Column()
-  cookTime: string; // e.g., "30 min"
+  cookTime: string;
 
   @Column()
-  servings: number; // e.g., 2, 4, 6
+  servings: number;
 
   @Column()
-  difficulty: string; // Easy, Medium, Hard
+  difficulty: string;
 
   @Column({ nullable: true })
   calories: number;
@@ -70,4 +70,10 @@ export class Recipe {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  authorId: number;
+
+  @Column()
+  authorName: string;
 }
