@@ -4,7 +4,13 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
+import { User } from '../users/user.entity';
+import { Note } from '../notes/note.entity';
+import { Planner } from '../planner/planner.entity';
 
 @Entity('recipe')
 export class Recipe {
@@ -76,4 +82,17 @@ export class Recipe {
 
   @Column()
   authorName: string;
+
+  @Column({ nullable: true })
+  imageId: string;
+
+  @ManyToOne(() => User, (user) => user.recipes)
+  @JoinColumn({ name: 'authorId' }) // name must match column above!
+  author: User;
+
+  @OneToMany(() => Note, (note) => note.recipe)
+  recipeNotes: Note[];
+
+  @OneToMany(() => Planner, (planner) => planner.recipe)
+  planner: Planner[];
 }
