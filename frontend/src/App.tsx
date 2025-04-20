@@ -9,7 +9,10 @@ import About from './Pages/About';
 import Notes from './Pages/Notes';
 import MealPlanner from './Pages/MealPlanner';
 import Recipes from './Pages/Recipes';
+import RecipeDetail from './Pages/Recipes/RecipeDetail';
 import ForgotPassword from './Pages/ForgotPassword';
+import Profile from './Pages/Profile/Profile';
+import Settings from './Pages/Settings/Settings';
 import Header from './Components/header';
 import './App.css';
 
@@ -27,7 +30,10 @@ function App() {
             <Route path="/notes" element={<Notes />} />
             <Route path="/meal-planner" element={<MealPlanner />} />
             <Route path="/recipes" element={<Recipes />} />
+            <Route path="/recipes/:id" element={<RecipeDetail />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/settings" element={<Settings />} />
           </Routes>
         </div>
       </Router>
