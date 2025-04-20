@@ -4,7 +4,13 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
 } from 'typeorm';
+import { User } from '../users/user.entity';
+import { Note } from '../notes/note.entity';
+import { Planner } from '../planner/planner.entity';
 
 @Entity('recipe')
 export class Recipe {
@@ -18,13 +24,13 @@ export class Recipe {
   description: string;
 
   @Column('text', { array: true })
-  ingredients: string[]; // Array of ingredients
+  ingredients: string[];
 
   @Column('text', { array: true })
-  instructions: string[]; // Array of step-by-step instructions
+  instructions: string[];
 
   @Column()
-  category: string; // e.g., breakfast, lunch, dinner, snack, drink, meal
+  category: string;
 
   @Column({ default: false })
   isVegetarian: boolean;
@@ -36,19 +42,19 @@ export class Recipe {
   containsEgg: boolean;
 
   @Column()
-  region: string; // e.g., Italian, Indian, Mexican
+  region: string;
 
   @Column()
-  prepTime: string; // e.g., "15 min"
+  prepTime: string;
 
   @Column()
-  cookTime: string; // e.g., "30 min"
+  cookTime: string;
 
   @Column()
-  servings: number; // e.g., 2, 4, 6
+  servings: number;
 
   @Column()
-  difficulty: string; // Easy, Medium, Hard
+  difficulty: string;
 
   @Column({ nullable: true })
   calories: number;
@@ -70,4 +76,23 @@ export class Recipe {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Column()
+  authorId: number;
+
+  @Column()
+  authorName: string;
+
+  @Column({ nullable: true })
+  imageId: string;
+
+  @ManyToOne(() => User, (user) => user.recipes)
+  @JoinColumn({ name: 'authorId' }) // name must match column above!
+  author: User;
+
+  @OneToMany(() => Note, (note) => note.recipe)
+  recipeNotes: Note[];
+
+  @OneToMany(() => Planner, (planner) => planner.recipe)
+  planner: Planner[];
 }

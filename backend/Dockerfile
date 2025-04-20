@@ -1,20 +1,18 @@
-# Use an official Node.js runtime as a parent image
-FROM node:16
+# 1. Use Node 20 (required for NestJS v11+)
+FROM node:20-alpine
 
-# Set the working directory inside the container
-WORKDIR /usr/src/app
+# 2. Set working directory
+WORKDIR /app
 
-# Copy package.json and package-lock.json
+# 3. Copy package files and install dependencies
 COPY package*.json ./
+RUN yarn install
 
-# Install dependencies
-RUN npm install
-
-# Copy the rest of your project files into the container
+# 4. Copy the rest of the application
 COPY . .
 
-# Expose the port your app will run on
-EXPOSE 3000
+# 5. Build the NestJS app
+RUN yarn build
 
-# Command to run your app
-CMD ["npm", "run", "start"]
+# 6. Start the app
+CMD ["node", "dist/main"]
